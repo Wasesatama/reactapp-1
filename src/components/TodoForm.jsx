@@ -18,11 +18,12 @@ class TodoForm extends React.Component {
         alert(`${inputTodoDescription} maksimal tanggal ${inputTodoDeadline}`)
 
         this.props.saveNewTodo(inputTodoDescription,inputTodoDeadline)
+        this.props.closeModal()
     }
 
     render() {
         return (
-            <Modal show={this.props.show}>
+            <Modal show={this.props.show} onHide={this.props.closeModal}>
                 <Form onSubmit={this.handleFormSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Task</Modal.Title>
@@ -38,7 +39,7 @@ class TodoForm extends React.Component {
                         </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={this.props.closeModal}>
                         Close
                     </Button>
                     <Button variant="primary" type="submit">

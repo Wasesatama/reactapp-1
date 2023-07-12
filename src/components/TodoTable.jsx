@@ -14,14 +14,18 @@ class TodoTable extends React.Component{
             <Table striped bordered hover>
             <tbody>
                 {
-                    this.props.todos.map((todo)=>{
+                    this.props.todos.map((todo,index)=>{
                         return (
                             <tr>
-                            <td><Form.Check type="checkbox"/></td>
-                            <td>{todo.description}</td>
+                            <td><Form.Check type="checkbox" onClick={(event)=>this.props.finishTodo(index)}/></td>
+                            {
+                                todo.isDone ? (<td><s>{todo.description}</s></td>) : (<td>{todo.description}</td>)
+                            }
                             <td>
-                                <Button variant="secondary">Edit</Button>{' '}
-                                <Button variant="danger">Delete</Button>{' '}
+                                {
+                                    todo.isDone? null :(<Button variant="secondary">Edit</Button>)
+                                }
+                                <Button variant="danger" onClick={(event)=>this.props.deleteTodo(index)}>Delete</Button>
                             </td>
                           </tr>  
                         )

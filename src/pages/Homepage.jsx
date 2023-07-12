@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import TodoTable from "../components/TodoTable";
 import TodoForm from "../components/TodoForm";
+import TodoFormFunctional from "../components/TodoForm.functional";
 
 class Homepage extends React.Component {
     constructor(props){
@@ -31,6 +32,20 @@ class Homepage extends React.Component {
         })
     }
 
+    handleCloseModal = () =>{
+        this.setState({
+            showAddToDoModal:false
+        })
+    }
+
+    handleFinishTodo = (index) =>{
+        let newStatusTodo = [...this.state.todos]
+        newStatusTodo[index].isDone = !newStatusTodo[index].isDone
+        this.setState({
+            todos:newStatusTodo
+        })
+    }
+
     saveNewTodo = (todoDescription, todoDeadline) => {
         let newTodo = {
             description: todoDescription,
@@ -44,6 +59,14 @@ class Homepage extends React.Component {
         })
     }
 
+    deleteTodo = (index) => {
+        let currTodoState = [...this.state.todos]
+        currTodoState.splice(index,1);
+        this.setState({
+            todos:currTodoState
+        })
+    }
+
     render () {
         return(
             <div>
@@ -51,9 +74,16 @@ class Homepage extends React.Component {
                     <Header/>
                 </div>
                 <div className="todolist">
-                    <TodoTable todos={this.state.todos} btnClick={this.handleBtnAddTodoClick}/>
+                    <TodoTable 
+                        todos={this.state.todos} 
+                        btnClick={this.handleBtnAddTodoClick} 
+                        deleteTodo={this.deleteTodo}
+                        finishTodo={this.handleFinishTodo}/>
                 </div>
-                <TodoForm show={this.state.showAddToDoModal} saveNewTodo={this.saveNewTodo}/>
+                <TodoFormFunctional
+                    show={this.state.showAddToDoModal} 
+                    saveNewTodo={this.saveNewTodo} 
+                    closeModal={this.handleCloseModal}/>
             </div>
         )
     }
