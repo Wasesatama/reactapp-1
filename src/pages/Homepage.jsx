@@ -8,7 +8,10 @@ class Homepage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            showAddToDoModal:false,
+            showFormModal:false,
+            dataToEdit:null,
+            dataToEditIndex:-1,
+            modalActionMode: "",
             todos:[
                 {
                     description: "Makan Kelomang",
@@ -28,13 +31,17 @@ class Homepage extends React.Component {
 
     handleBtnAddTodoClick = () => {
         this.setState({
-            showAddToDoModal:true
+            showFormModal:true,
+            modalActionMode:"Add"
         })
     }
 
     handleCloseModal = () =>{
         this.setState({
-            showAddToDoModal:false
+            showFormModal:false,
+            dataToEdit:null,
+            dataToEditIndex:-1,
+            modalActionMode:""
         })
     }
 
@@ -43,6 +50,17 @@ class Homepage extends React.Component {
         newStatusTodo[index].isDone = !newStatusTodo[index].isDone
         this.setState({
             todos:newStatusTodo
+        })
+    }
+
+    handleBtnEditClick = (index) =>{
+        let currTodos = [...this.state.todos]
+        let todoEdit = currTodos [index]
+        this.setState({
+            dataToEdit:todoEdit,
+            dataToEditIndex:index,
+            showFormModal:true,
+            modalActionMode:"Edit"
         })
     }
 
@@ -56,6 +74,15 @@ class Homepage extends React.Component {
         let newTodoState = [...this.state.todos,newTodo]
         this.setState({
             todos:newTodoState
+        })
+    }
+
+    saveEditedTodo = (todoDescription, todoDeadline) => {
+        let currTodoState = [...this.state.todos]
+        currTodoState[this.state.dataToEditIndex].description=todoDescription
+        currTodoState[this.state.dataToEditIndex].deadline=todoDeadline
+        this.setState({
+            todos:currTodoState
         })
     }
 
@@ -76,14 +103,19 @@ class Homepage extends React.Component {
                 <div className="todolist">
                     <TodoTable 
                         todos={this.state.todos} 
-                        btnClick={this.handleBtnAddTodoClick} 
+                        btnClick={this.handleBtnAddTodoClick}
+                        editTodo={this.handleBtnEditClick} 
                         deleteTodo={this.deleteTodo}
                         finishTodo={this.handleFinishTodo}/>
                 </div>
                 <TodoFormFunctional
-                    show={this.state.showAddToDoModal} 
-                    saveNewTodo={this.saveNewTodo} 
-                    closeModal={this.handleCloseModal}/>
+                    show={this.state.showFormModal} 
+                    saveNewTodo={this.saveNewTodo}
+                    saveEditedTodo={this.saveEditedTodo} 
+                    closeModal={this.handleCloseModal}
+                    todoToEdit={this.state.dataToEdit}
+                    todoToEditIndex={this.state.dataToEditIndex}
+                    modalMode={this.state.modalActionMode}/>
             </div>
         )
     }

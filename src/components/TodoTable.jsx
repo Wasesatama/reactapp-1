@@ -23,7 +23,7 @@ class TodoTable extends React.Component{
                             }
                             <td>
                                 {
-                                    todo.isDone? null :(<Button variant="secondary">Edit</Button>)
+                                    todo.isDone? null :(<Button variant="secondary" onClick={(event)=>this.props.editTodo(index)}>Edit</Button>)
                                 }
                                 <Button variant="danger" onClick={(event)=>this.props.deleteTodo(index)}>Delete</Button>
                             </td>

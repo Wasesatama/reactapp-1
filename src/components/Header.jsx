@@ -10,7 +10,7 @@ class Header extends React.Component {
     }
 
     componentDidMount(){
-        console.log("componentDidMount() is called...")
+        //console.log("componentDidMount() is called...")
         let setIntervalId = setInterval(()=> {
             this.setState ({
                 currDateTime:new Date()
@@ -24,7 +24,7 @@ class Header extends React.Component {
 
     componentDidUpdate(prevState,prevProps){
         //console.log("componentDidUpdate() is called")
-        console.log(this.state.tickerId)
+        //console.log(this.state.tickerId)
         //console.log(prevState)
         //console.log(prevProps)
     }
