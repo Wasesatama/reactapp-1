@@ -2,7 +2,7 @@ import React from "react";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import styles from '../styles/todotable.module.css'
 
 class TodoTable extends React.Component{
     constructor(props){
@@ -11,21 +11,21 @@ class TodoTable extends React.Component{
 
     render(){
         return(
-            <Table striped bordered hover>
+            <Table bordered hover className={styles['todo-table']}>
             <tbody>
                 {
                     this.props.todos.map((todo,index)=>{
                         return (
                             <tr>
-                            <td><Form.Check type="checkbox" onClick={(event)=>this.props.finishTodo(index)}/></td>
+                            <td className={styles['todo-checkbox']}><Form.Check type="checkbox" onClick={(event)=>this.props.finishTodo(index)}/></td>
                             {
                                 todo.isDone ? (<td><s>{todo.description}</s></td>) : (<td>{todo.description}</td>)
                             }
-                            <td>
+                            <td className={styles['action-cell']}>
                                 {
-                                    todo.isDone? null :(<Button variant="secondary" onClick={(event)=>this.props.editTodo(index)}>Edit</Button>)
+                                    todo.isDone? null :(<Button className={styles.btn} variant="secondary" onClick={(event)=>this.props.editTodo(index)}>Edit</Button>)
                                 }
-                                <Button variant="danger" onClick={(event)=>this.props.deleteTodo(index)}>Delete</Button>
+                                <Button className={styles.btn} variant="danger" onClick={(event)=>this.props.deleteTodo(index)}>Delete</Button>
                             </td>
                           </tr>  
                         )

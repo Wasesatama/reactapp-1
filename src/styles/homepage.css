@@ -1,0 +1,12 @@
+body {
+    margin: 0 1em;
+}
+
+.header-section {
+    text-align: center;
+}
+
+#todolist-section{
+    display: flex;
+    justify-content: center;
+}

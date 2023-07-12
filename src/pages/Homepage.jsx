@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import TodoTable from "../components/TodoTable";
 import TodoForm from "../components/TodoForm";
 import TodoFormFunctional from "../components/TodoForm.functional";
+import '../styles/homepage.css'
 
 class Homepage extends React.Component {
     constructor(props){
@@ -100,7 +101,7 @@ class Homepage extends React.Component {
                 <div className="header-section">
                     <Header/>
                 </div>
-                <div className="todolist">
+                <div id="todolist-section">
                     <TodoTable 
                         todos={this.state.todos} 
                         btnClick={this.handleBtnAddTodoClick}
