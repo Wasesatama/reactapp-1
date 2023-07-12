@@ -7,6 +7,7 @@ class Homepage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            showAddToDoModal:false,
             todos:[
                 {
                     description: "Makan Kelomang",
@@ -24,6 +25,18 @@ class Homepage extends React.Component {
         }
     }
 
+    handleBtnAddTodoClick = () => {
+        this.setState({
+            showAddToDoModal:true
+        })
+    }
+
+    handleFormSubmit = () => {
+        this.setState({
+            showAddToDoModal:false
+        })
+    }
+
     render () {
         return(
             <div>
@@ -31,9 +44,9 @@ class Homepage extends React.Component {
                     <Header/>
                 </div>
                 <div className="todolist">
-                    <TodoTable todos={this.state.todos}/>
+                    <TodoTable todos={this.state.todos} btnClick={this.handleBtnAddTodoClick}/>
                 </div>
-                <TodoForm />
+                <TodoForm show={this.state.showAddToDoModal} submitForm={this.handleFormSubmit}/>
             </div>
         )
     }

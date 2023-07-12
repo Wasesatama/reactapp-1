@@ -29,7 +29,7 @@ class TodoTable extends React.Component{
                 }
                 <tr>
                 <td colSpan={3}>
-                    <Button variant="primary">Add New Task</Button>
+                    <Button variant="primary" onClick={this.props.btnClick}>Add New Task</Button>
                 </td>
                 </tr>  
             </tbody>
