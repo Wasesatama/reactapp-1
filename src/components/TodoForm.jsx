@@ -17,7 +17,7 @@ class TodoForm extends React.Component {
         
         alert(`${inputTodoDescription} maksimal tanggal ${inputTodoDeadline}`)
 
-        this.props.submitForm()
+        this.props.saveNewTodo(inputTodoDescription,inputTodoDeadline)
     }
 
     render() {

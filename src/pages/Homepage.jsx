@@ -11,13 +11,13 @@ class Homepage extends React.Component {
             todos:[
                 {
                     description: "Makan Kelomang",
-                    createdAt: "2023-11-01 14.55",
+                    deadline: "2023-11-01 14.55",
                     createdBy: "Ryan",
                     isDone: false
                 },
                 {
                     description: "Belajar Makan Biar Bisa Main",
-                    createdAt: "2023-11-01 14.20",
+                    deadline: "2023-11-01 14.20",
                     createdBy: "Gede",
                     isDone: false
                 }
@@ -31,9 +31,16 @@ class Homepage extends React.Component {
         })
     }
 
-    handleFormSubmit = () => {
+    saveNewTodo = (todoDescription, todoDeadline) => {
+        let newTodo = {
+            description: todoDescription,
+            deadline: todoDeadline,
+            createdBy: "Aryo",
+            isDone:false
+        }
+        let newTodoState = [...this.state.todos,newTodo]
         this.setState({
-            showAddToDoModal:false
+            todos:newTodoState
         })
     }
 
@@ -46,7 +53,7 @@ class Homepage extends React.Component {
                 <div className="todolist">
                     <TodoTable todos={this.state.todos} btnClick={this.handleBtnAddTodoClick}/>
                 </div>
-                <TodoForm show={this.state.showAddToDoModal} submitForm={this.handleFormSubmit}/>
+                <TodoForm show={this.state.showAddToDoModal} saveNewTodo={this.saveNewTodo}/>
             </div>
         )
     }
